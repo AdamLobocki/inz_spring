@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulator walut</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+    <style>
+
+    .textRel, .dropdownRel {
+    position: relative;
+    display: inline-block;
+    }
+    </style>
+</head>
+<body>
+Ilość Kasy <br>
+
+
+<div align="right">
+    <form action="#" th:action="@{/}">
+        <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Wyloguj"/>
+    </form>
+</div>
+
+
+<form action="#" th:action="@{/historyPage}">
+    <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Historia"/>
+</form>
+
+
+<br>
+
+<form action="#" th:action="@{/rankPage}">
+    <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Ranking"/>
+</form>
+<div align="center">
+    Lista walut i ceny
+
+
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Dolar 5zł</li>
+            <li class="list-group-item">Euro 23zł</li>
+            <li class="list-group-item">Jen 1zł</li>
+            <li class="list-group-item">Szekiel 999zł</li>
+            <li class="list-group-item">Korona 3zł</li>
+        </ul>
+
+
+<div class="textRel">
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Wybierz walutę
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>
+</div>
+    <div class="dropdownRel">
+    <form>
+        <div class="form-group">
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Podaj ilość">
+        </div>
+    </form>
+</div>
+<div>
+    <button type="button" class="btn btn-secondary">Kup</button>
+</div>
+    <!--
+  <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Dolar
+            <span class="badge badge-primary badge-pill">14zł</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Euro
+            <span class="badge badge-primary badge-pill">2zł</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Jen
+            <span class="badge badge-primary badge-pill">1zł</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Szekiel
+            <span class="badge badge-primary badge-pill">2zł</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Korona
+            <span class="badge badge-primary badge-pill">8zł</span>
+        </li>
+        </ul>
+
+
+    <li th:each="currency: ${currency}">
+        <h3 th:text="${currency.name}"></h3></br>
+        <h5>Składniki: </h5></br></br>
+        <span th:text=" ${currency.recentRate}"></span></br></br>
+        -->
+
+</div>
+</body>
+</html>
