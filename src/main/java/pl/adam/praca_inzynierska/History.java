@@ -1,17 +1,23 @@
 package pl.adam.praca_inzynierska;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String actualDate;
-    private int currencyRate;
-    private int amountBought;
 
-    @ManyToOne
-    private AccountBalance accountBalance;
+    @OneToOne(mappedBy = "history")
+    private Account account;
+
+    @OneToMany(mappedBy = "history")
+    private List<Transaction> transaction;
+
+
+
+
 
 }

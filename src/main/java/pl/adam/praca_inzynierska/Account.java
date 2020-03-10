@@ -12,8 +12,13 @@ public class Account {
     private String username;
     private String password;
     private String email;
+    private String accountCreateDate;
+    private double balance;
 
     @OneToOne
-    @JoinColumn(name = "accountBalance_id", referencedColumnName = "id")
-    private AccountBalance accountBalance;
+    @JoinColumn(name = "history_id", referencedColumnName = "id")
+    private History history;
+
+
+
 }

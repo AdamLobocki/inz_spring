@@ -1,4 +1,4 @@
-INSERT INTO account_balance(id ,recent_Account_Balance, profit) VALUES
+/* INSERT INTO account_balance(id ,recent_Account_Balance, profit) VALUES
 (1, 500, 100),
 (2, 30000, 150),
 (3, 67231, 12141),
@@ -14,3 +14,6 @@ INSERT INTO history(id, actual_Date, currency_Rate, amount_Bought, account_Balan
 (2, 'BBBB', 30000, 150, 2),
 (3, 'CCCCC', 67231, 12141, 3),
 (4, 'DDDD', 51512, 1222, 4);
+
+
+ */
