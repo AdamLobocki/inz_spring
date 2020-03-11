@@ -1,6 +1,7 @@
-package pl.adam.praca_inzynierska;
+package pl.adam.praca_inzynierska.account;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Account {
@@ -15,10 +16,8 @@ public class Account {
     private String accountCreateDate;
     private double balance;
 
-    @OneToOne
-    @JoinColumn(name = "history_id", referencedColumnName = "id")
-    private History history;
-
+    @OneToMany(mappedBy="account")
+    private List<Transaction> transaction;
 
 
 }

@@ -1,4 +1,6 @@
-package pl.adam.praca_inzynierska;
+package pl.adam.praca_inzynierska.account;
+
+import pl.adam.praca_inzynierska.account.Account;
 
 import javax.persistence.*;
 
@@ -15,5 +17,5 @@ public class Transaction {
     private double amountBought;
 
     @ManyToOne
-    private History history;
+    private Account account;
 }

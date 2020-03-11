@@ -1,5 +1,7 @@
 package pl.adam.praca_inzynierska;
 
+import pl.adam.praca_inzynierska.currency.Currency;
+
 import javax.persistence.*;
 
 // @Entity
