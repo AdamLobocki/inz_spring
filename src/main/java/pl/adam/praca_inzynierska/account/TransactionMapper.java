@@ -31,7 +31,7 @@ public class TransactionMapper {
         return null;
     }
 
-    public Transaction transactionMapper(Transaction transactionTO) {
+    public Transaction transactionMapper(TransactionTO transactionTO) {
 
         if (transactionTO != null) {
             Transaction transaction = new Transaction();
@@ -42,9 +42,9 @@ public class TransactionMapper {
             transaction.setAmountBought(transactionTO.getAmountBought());
 
             AccountTO account = new AccountTO();
-            transactionTO.setAccount(accountMapper.accountMapper(account));
+            transaction.setAccount(accountMapper.accountMapper(account));
 
-            return transactionTO;
+            return transaction;
         }
 
         return null;
