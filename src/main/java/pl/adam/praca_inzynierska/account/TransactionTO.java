@@ -9,7 +9,7 @@ public class TransactionTO {
     private double buyRate;
     private double sellRate;
     private double amountBought;
-    private Account account;
+    private AccountTO accountTO;
 
     public long getId() {
         return id;
@@ -67,11 +67,25 @@ public class TransactionTO {
         this.amountBought = amountBought;
     }
 
-    public Account getAccount() {
-        return account;
+    public AccountTO getAccount() {
+        return accountTO;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccount(AccountTO accountTO) {
+        this.accountTO = accountTO;
+    }
+
+    public TransactionTO() {
+    }
+
+    public TransactionTO(long id, String currencyName, String buyDate, String sellDate, double buyRate, double sellRate, double amountBought, AccountTO accountTO) {
+        this.id = id;
+        this.currencyName = currencyName;
+        this.buyDate = buyDate;
+        this.sellDate = sellDate;
+        this.buyRate = buyRate;
+        this.sellRate = sellRate;
+        this.amountBought = amountBought;
+        this.accountTO = accountTO;
     }
 }

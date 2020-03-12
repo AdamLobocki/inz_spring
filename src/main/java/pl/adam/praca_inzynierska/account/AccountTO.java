@@ -68,4 +68,17 @@ public class AccountTO {
     public void setTransactionTO(List<TransactionTO> transactionTO) {
         this.transactionTO = transactionTO;
     }
+
+    public AccountTO() {
+    }
+
+    public AccountTO(long id, String username, String password, String email, String accountCreateDate, double balance, List<TransactionTO> transactionTO) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.accountCreateDate = accountCreateDate;
+        this.balance = balance;
+        this.transactionTO = transactionTO;
+    }
 }
