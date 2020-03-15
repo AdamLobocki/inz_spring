@@ -1,11 +1,11 @@
-package pl.adam.praca_inzynierska.currency.JPY;
+package pl.adam.praca_inzynierska.currency.usd;
 
 import pl.adam.praca_inzynierska.account.Transaction;
 
 import javax.persistence.*;
 
 @Entity
-public class JPY {
+public class USD {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -47,10 +47,10 @@ public class JPY {
         this.transaction = transaction;
     }
 
-    public JPY() {
+    public USD() {
     }
 
-    public JPY(String actualizationDate, double rate, Transaction transaction) {
+    public USD(String actualizationDate, double rate, Transaction transaction) {
         this.actualizationDate = actualizationDate;
         this.rate = rate;
         this.transaction = transaction;

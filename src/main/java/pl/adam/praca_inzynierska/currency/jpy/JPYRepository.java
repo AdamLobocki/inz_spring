@@ -1,4 +1,4 @@
-package pl.adam.praca_inzynierska.currency.JPY;
+package pl.adam.praca_inzynierska.currency.jpy;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,10 +1,9 @@
-package pl.adam.praca_inzynierska.currency.JPY;
+package pl.adam.praca_inzynierska.currency.usd;
 
 import pl.adam.praca_inzynierska.account.TransactionTO;
 
-import java.util.List;
 
-public class JPYTO {
+public class USDTO {
     private long id;
     private String actualizationDate;
     private double rate;
@@ -42,10 +41,10 @@ public class JPYTO {
         this.transactionTO = transactionTO;
     }
 
-    public JPYTO() {
+    public USDTO() {
     }
 
-    public JPYTO(String actualizationDate, double rate, TransactionTO transactionTO) {
+    public USDTO(String actualizationDate, double rate, TransactionTO transactionTO) {
         this.actualizationDate = actualizationDate;
         this.rate = rate;
         this.transactionTO = transactionTO;

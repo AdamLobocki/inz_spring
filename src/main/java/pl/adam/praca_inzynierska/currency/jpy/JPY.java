@@ -1,14 +1,19 @@
-package pl.adam.praca_inzynierska.currency.USD;
+package pl.adam.praca_inzynierska.currency.jpy;
 
 import pl.adam.praca_inzynierska.account.Transaction;
-import pl.adam.praca_inzynierska.account.TransactionTO;
 
+import javax.persistence.*;
 
-public class USDTO {
+@Entity
+public class JPY {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String actualizationDate;
     private double rate;
-    private TransactionTO transactionTO;
+    @OneToOne
+    @JoinColumn(name = "transaction_id", referencedColumnName = "id")
+    private Transaction transaction;
 
     public long getId() {
         return id;
@@ -34,20 +39,20 @@ public class USDTO {
         this.rate = rate;
     }
 
-    public TransactionTO getTransaction() {
-        return transactionTO;
+    public Transaction getTransaction() {
+        return transaction;
     }
 
-    public void setTransaction(TransactionTO transactionTO) {
-        this.transactionTO = transactionTO;
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
     }
 
-    public USDTO() {
+    public JPY() {
     }
 
-    public USDTO(String actualizationDate, double rate, TransactionTO transactionTO) {
+    public JPY(String actualizationDate, double rate, Transaction transaction) {
         this.actualizationDate = actualizationDate;
         this.rate = rate;
-        this.transactionTO = transactionTO;
+        this.transaction = transaction;
     }
 }
