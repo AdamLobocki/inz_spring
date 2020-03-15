@@ -3,6 +3,7 @@ package pl.adam.praca_inzynierska.currency.chf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.adam.praca_inzynierska.currency.apiGetter.RatesGetter;
 
 
 import java.util.List;
@@ -12,6 +13,9 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(readOnly = true)
 public class CHFService {
+
+    private RatesGetter ratesGetter;
+    private final String CHF = "http://api.nbp.pl/api/exchangerates/rates/a/chf/?format=json";
 
     private CHFRepository chfRepository;
     private CHFMapper chfMapper;
@@ -39,6 +43,8 @@ public class CHFService {
 
     @Transactional
     public CHFTO saveCHF(CHFTO chfTO){
+        chfTO.setActualizationDate(ratesGetter.date(CHF));
+        chfTO.setRate(ratesGetter.rate(CHF));
         CHF entity = chfMapper.chfMapper(chfTO);
         entity = chfRepository.save(entity);
         return chfMapper.chfTOMapper(entity);
