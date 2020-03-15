@@ -27,7 +27,7 @@ public class USDService {
                 .collect(Collectors.toList());
     }
 
-    public USDTO findCHFById(Long id) {
+    public USDTO findUSDById(Long id) {
         Optional<USD> usd = usdRepository.findById(id);
         if (!usd.isPresent()) {
             throw new IllegalArgumentException(); // TODO accountDoesNotExistException

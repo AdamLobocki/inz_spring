@@ -8,7 +8,7 @@ public class GBPTO {
     private long id;
     private String actualizationDate;
     private double rate;
-    private List<TransactionTO> transactionTO;
+    private TransactionTO transactionTO;
 
     public long getId() {
         return id;
@@ -34,20 +34,18 @@ public class GBPTO {
         this.rate = rate;
     }
 
-    public List<TransactionTO> getTransactionTO() {
-
+    public TransactionTO getTransaction() {
         return transactionTO;
     }
 
-    public void setTransactionTO(List<TransactionTO> transactionTO) {
-
+    public void setTransaction(TransactionTO transactionTO) {
         this.transactionTO = transactionTO;
     }
 
     public GBPTO() {
     }
 
-    public GBPTO(String actualizationDate, double rate, List<TransactionTO> transactionTO) {
+    public GBPTO(String actualizationDate, double rate, TransactionTO transactionTO) {
         this.actualizationDate = actualizationDate;
         this.rate = rate;
         this.transactionTO = transactionTO;

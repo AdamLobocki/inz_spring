@@ -9,7 +9,7 @@ public class CHFTO {
     private long id;
     private String actualizationDate;
     private double rate;
-    private List<TransactionTO> transactionTO;
+    private TransactionTO transactionTO;
 
     public long getId() {
         return id;
@@ -35,20 +35,18 @@ public class CHFTO {
         this.rate = rate;
     }
 
-    public List<TransactionTO> getTransactionTO() {
-
+    public TransactionTO getTransaction() {
         return transactionTO;
     }
 
-    public void setTransactionTO(List<TransactionTO> transactionTO) {
-
+    public void setTransaction(TransactionTO transactionTO) {
         this.transactionTO = transactionTO;
     }
 
     public CHFTO() {
     }
 
-    public CHFTO(String actualizationDate, double rate, List<TransactionTO> transactionTO) {
+    public CHFTO(String actualizationDate, double rate, TransactionTO transactionTO) {
         this.actualizationDate = actualizationDate;
         this.rate = rate;
         this.transactionTO = transactionTO;

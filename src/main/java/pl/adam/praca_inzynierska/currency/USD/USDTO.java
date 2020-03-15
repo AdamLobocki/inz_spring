@@ -1,14 +1,14 @@
 package pl.adam.praca_inzynierska.currency.USD;
 
+import pl.adam.praca_inzynierska.account.Transaction;
 import pl.adam.praca_inzynierska.account.TransactionTO;
 
-import java.util.List;
 
 public class USDTO {
     private long id;
     private String actualizationDate;
     private double rate;
-    private List<TransactionTO> transactionTO;
+    private TransactionTO transactionTO;
 
     public long getId() {
         return id;
@@ -34,20 +34,18 @@ public class USDTO {
         this.rate = rate;
     }
 
-    public List<TransactionTO> getTransactionTO() {
-
+    public TransactionTO getTransaction() {
         return transactionTO;
     }
 
-    public void setTransactionTO(List<TransactionTO> transactionTO) {
-
+    public void setTransaction(TransactionTO transactionTO) {
         this.transactionTO = transactionTO;
     }
 
     public USDTO() {
     }
 
-    public USDTO(String actualizationDate, double rate, List<TransactionTO> transactionTO) {
+    public USDTO(String actualizationDate, double rate, TransactionTO transactionTO) {
         this.actualizationDate = actualizationDate;
         this.rate = rate;
         this.transactionTO = transactionTO;
