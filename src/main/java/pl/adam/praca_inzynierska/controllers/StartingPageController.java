@@ -12,6 +12,12 @@ public class StartingPageController {
         return "startingPage";
     }
 
+    @GetMapping("/createAccoutPage")
+    public String addAccount() {
+
+        return "createAccountPage";
+    }
+
 
 
 }
