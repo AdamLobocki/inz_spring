@@ -40,8 +40,8 @@ public class CHFMapper {
         if (chfTO != null) {
             CHF chf = new CHF();
 
-            chf.setActualizationDate(chf.getActualizationDate());
-            chf.setRate(chf.getRate());
+            chf.setActualizationDate(chfTO.getActualizationDate());
+            chf.setRate(chfTO.getRate());
 
             Transaction transaction = new Transaction();
             chfTO.setTransaction(transactionMapper.transactionTOMapper(transaction));

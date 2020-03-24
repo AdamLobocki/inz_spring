@@ -24,6 +24,7 @@ public class CHFService {
     public CHFService(CHFRepository chfRepository, CHFMapper chfMapper) {
         this.chfRepository = chfRepository;
         this.chfMapper = chfMapper;
+        this.ratesGetter = new RatesGetter();
     }
 
     public List<CHFTO> findAllCHF() {
