@@ -26,11 +26,11 @@ public class AccountMapper {
         if (accountTO != null) {
             Account account = new Account();
 
-            account.setUsername(account.getUsername());
-            account.setPassword(account.getPassword());
-            account.setEmail(account.getEmail());
-            account.setAccountCreateDate(account.getAccountCreateDate());
-            account.setBalance(account.getBalance());
+            account.setUsername(accountTO.getUsername());
+            account.setPassword(accountTO.getPassword());
+            account.setEmail(accountTO.getEmail());
+            account.setAccountCreateDate(accountTO.getAccountCreateDate());
+            account.setBalance(accountTO.getBalance());
 
             return account;
         }
