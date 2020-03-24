@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,11 +18,14 @@ import java.util.stream.Collectors;
 public class AccountService {
     private AccountRepository accountRepository;
     private AccountMapper accountMapper;
+    private Date date;
+    private DateFormat dateFormat;
 
     @Autowired
     public AccountService(AccountRepository accountRepository, AccountMapper accountMapper) {
         this.accountRepository = accountRepository;
         this.accountMapper = accountMapper;
+        this.dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     }
 
     public List<AccountTO> findAllAccount() {
@@ -38,6 +45,10 @@ public class AccountService {
 
     @Transactional
     public AccountTO saveAccount(AccountTO accountTO){
+        this.date = Calendar.getInstance().getTime();
+
+        accountTO.setBalance(100);
+        accountTO.setAccountCreateDate(dateFormat.format(date));
         Account entity = accountMapper.accountMapper(accountTO);
         entity = accountRepository.save(entity);
         return accountMapper.accountTOMapper(entity);

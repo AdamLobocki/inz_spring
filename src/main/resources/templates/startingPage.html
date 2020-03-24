@@ -15,6 +15,10 @@
 
 <body background="https://images.wallpaperscraft.com/image/dollar_currency_money_106888_1920x1080.jpg">
 
+<div th:if="${errorMessage}">
+    <div class="alert alert-info" th:text="${errorMessage}"></div>
+</div>
+
 <div class="container register">
     <div class="row">
         <div class="col-md-3 register-left">
@@ -28,7 +32,7 @@
                     <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Logowanie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="newuser-tab" data-toggle="tab" href="/createAccoutPage" role="tab" aria-controls="newuser" aria-selected="false">Nowy użytkownik</a>
+                    <a class="nav-link" id="newuser-tab" data-toggle="tab" href="/createAccountPage" role="tab" aria-controls="newuser" aria-selected="false">Nowy użytkownik</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
