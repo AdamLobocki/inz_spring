@@ -3,6 +3,7 @@ package pl.adam.praca_inzynierska.currency.usd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.adam.praca_inzynierska.currency.abstractService;
 
 
 import java.util.List;
@@ -11,7 +12,10 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
-public class USDService {
+public class USDService extends abstractService {
+
+    private final String USD_LINK = "http://api.nbp.pl/api/exchangerates/rates/a/usd/?format=json";
+
     private USDRepository usdRepository;
     private USDMapper usdMapper;
 
@@ -35,6 +39,21 @@ public class USDService {
 
         return usdMapper.usdTOMapper(usd.get());
     }
+
+    public USDTO findLastRecord() {
+        Long id = Long.valueOf(String.valueOf(findAllUSD().size()));
+
+        return findUSDById(id);
+    }
+
+    public USDTO usdTOObjectCreate() {
+        USDTO usdTO = new USDTO();
+        usdTO.setActualizationDate(super.getRatesGetter().date(USD_LINK));
+        usdTO.setRate(super.getRatesGetter().rate(USD_LINK));
+
+        return usdTO;
+    }
+
 
     @Transactional
     public USDTO saveUSD(USDTO usdTO){

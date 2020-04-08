@@ -36,14 +36,15 @@ public class EURMapper {
         if (eurTO != null) {
             EUR eur = new EUR();
 
-            eur.setActualizationDate(eur.getActualizationDate());
-            eur.setRate(eur.getRate());
+            eur.setActualizationDate(eurTO.getActualizationDate());
+            eur.setRate(eurTO.getRate());
 
             Transaction transaction = new Transaction();
             eurTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
 
             return eur;
         }
+
 
         return null;
     }

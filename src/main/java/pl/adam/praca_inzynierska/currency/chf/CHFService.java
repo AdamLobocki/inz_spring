@@ -3,6 +3,7 @@ package pl.adam.praca_inzynierska.currency.chf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.adam.praca_inzynierska.currency.abstractService;
 import pl.adam.praca_inzynierska.currency.apiGetter.RatesGetter;
 
 
@@ -12,10 +13,9 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
-public class CHFService {
+public class CHFService extends abstractService {
 
-    private RatesGetter ratesGetter;
-    private final String CHF = "http://api.nbp.pl/api/exchangerates/rates/a/chf/?format=json";
+    private final String CHF_LINK = "http://api.nbp.pl/api/exchangerates/rates/a/chf/?format=json";
 
     private CHFRepository chfRepository;
     private CHFMapper chfMapper;
@@ -24,7 +24,6 @@ public class CHFService {
     public CHFService(CHFRepository chfRepository, CHFMapper chfMapper) {
         this.chfRepository = chfRepository;
         this.chfMapper = chfMapper;
-        this.ratesGetter = new RatesGetter();
     }
 
     public List<CHFTO> findAllCHF() {
@@ -42,10 +41,22 @@ public class CHFService {
         return chfMapper.chfTOMapper(chf.get());
     }
 
+    public CHFTO findLastCHFRecord() {
+        Long id = Long.valueOf(String.valueOf(findAllCHF().size()));
+
+        return findCHFById(id);
+    }
+
+    public CHFTO chfTOObjectCreate() {
+        CHFTO gbpTO = new CHFTO();
+        gbpTO.setActualizationDate(super.getRatesGetter().date(CHF_LINK));
+        gbpTO.setRate(super.getRatesGetter().rate(CHF_LINK));
+
+        return gbpTO;
+    }
+
     @Transactional
     public CHFTO saveCHF(CHFTO chfTO){
-        chfTO.setActualizationDate(ratesGetter.date(CHF));
-        chfTO.setRate(ratesGetter.rate(CHF));
         CHF entity = chfMapper.chfMapper(chfTO);
         entity = chfRepository.save(entity);
         return chfMapper.chfTOMapper(entity);

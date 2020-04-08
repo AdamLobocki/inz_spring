@@ -38,8 +38,8 @@ public class GBPMapper {
         if (gbpTO != null) {
             GBP gbp = new GBP();
 
-            gbp.setActualizationDate(gbp.getActualizationDate());
-            gbp.setRate(gbp.getRate());
+            gbp.setActualizationDate(gbpTO.getActualizationDate());
+            gbp.setRate(gbpTO.getRate());
 
             Transaction transaction = new Transaction();
             gbpTO.setTransaction(transactionMapper.transactionTOMapper(transaction));

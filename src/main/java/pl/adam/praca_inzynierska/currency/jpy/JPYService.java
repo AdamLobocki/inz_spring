@@ -4,6 +4,7 @@ package pl.adam.praca_inzynierska.currency.jpy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.adam.praca_inzynierska.currency.abstractService;
 
 
 import java.util.List;
@@ -12,7 +13,9 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
-public class JPYService {
+public class JPYService extends abstractService {
+
+    private final String JPY_LINK = "http://api.nbp.pl/api/exchangerates/rates/a/jpy/?format=json";
 
     private JPYRepository jpyRepository;
     private JPYMapper jpyMapper;
@@ -37,6 +40,21 @@ public class JPYService {
 
         return jpyMapper.jpyTOMapper(jpy.get());
     }
+
+    public JPYTO findLastRecord() {
+        Long id = Long.valueOf(String.valueOf(findAllJPY().size()));
+
+        return findJPYById(id);
+    }
+
+    public JPYTO jpyTOObjectCreate() {
+        JPYTO gbpTO = new JPYTO();
+        gbpTO.setActualizationDate(super.getRatesGetter().date(JPY_LINK));
+        gbpTO.setRate(super.getRatesGetter().rate(JPY_LINK));
+
+        return gbpTO;
+    }
+
 
     @Transactional
     public JPYTO saveJPY(JPYTO chfTO){

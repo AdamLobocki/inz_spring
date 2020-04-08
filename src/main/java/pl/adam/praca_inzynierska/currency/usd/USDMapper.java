@@ -36,8 +36,8 @@ public class USDMapper {
         if (usdTO != null) {
             USD usd = new USD();
 
-            usd.setActualizationDate(usd.getActualizationDate());
-            usd.setRate(usd.getRate());
+            usd.setActualizationDate(usdTO.getActualizationDate());
+            usd.setRate(usdTO.getRate());
 
             Transaction transaction = new Transaction();
             usdTO.setTransaction(transactionMapper.transactionTOMapper(transaction));

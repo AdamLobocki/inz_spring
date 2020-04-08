@@ -39,18 +39,25 @@ Ilość Kasy <br>
 <form action="#" th:action="@{/rankPage}">
     <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Ranking"/>
 </form>
+<br/>
+
+<form action="#" th:action="@{/getCurrencies}">
+    <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="pobierz kursy"/>
+</form><br/>
 <div align="center">
     Lista walut i ceny
 
 
 
+    <div th:if="${flag} == true">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Dolar 5zł</li>
-            <li class="list-group-item">Euro 23zł</li>
-            <li class="list-group-item">Jen 1zł</li>
-            <li class="list-group-item">Szekiel 999zł</li>
-            <li class="list-group-item">Korona 3zł</li>
+            <li class="list-group-item" th:text="|1 EUR: ${rates.get(0)}|"> </li>
+            <li class="list-group-item" th:text="|1 USD: ${rates.get(1)}|"> </li>
+            <li class="list-group-item" th:text="|1 CHF: ${rates.get(2)}|"> </li>
+            <li class="list-group-item" th:text="|1 GBP: ${rates.get(3)}|"> </li>
+            <li class="list-group-item" th:text="|100 JPY: ${rates.get(4)}|"> </li>
         </ul>
+    </div>
 
 
 <div class="textRel">

@@ -37,8 +37,8 @@ public class JPYMapper {
         if (jpyTO != null) {
             JPY jpy = new JPY();
 
-            jpy.setActualizationDate(jpy.getActualizationDate());
-            jpy.setRate(jpy.getRate());
+            jpy.setActualizationDate(jpyTO.getActualizationDate());
+            jpy.setRate(jpyTO.getRate());
 
             Transaction transaction = new Transaction();
             jpyTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
