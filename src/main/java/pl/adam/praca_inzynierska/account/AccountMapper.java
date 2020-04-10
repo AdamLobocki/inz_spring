@@ -28,6 +28,7 @@ public class AccountMapper {
 
             account.setUsername(accountTO.getUsername());
             account.setPassword(accountTO.getPassword());
+            account.setRole(accountTO.getRole());
             account.setEmail(accountTO.getEmail());
             account.setAccountCreateDate(accountTO.getAccountCreateDate());
             account.setBalance(accountTO.getBalance());

@@ -48,6 +48,7 @@ public class AccountService {
         this.date = Calendar.getInstance().getTime();
 
         accountTO.setBalance(100);
+        accountTO.setRole("USER");
         accountTO.setAccountCreateDate(dateFormat.format(date));
         Account entity = accountMapper.accountMapper(accountTO);
         entity = accountRepository.save(entity);

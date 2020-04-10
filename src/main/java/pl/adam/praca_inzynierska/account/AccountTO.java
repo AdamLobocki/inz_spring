@@ -1,6 +1,10 @@
 package pl.adam.praca_inzynierska.account;
 
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.List;
 
 public class AccountTO {
@@ -11,7 +15,22 @@ public class AccountTO {
     private String email;
     private String accountCreateDate;
     private double balance;
+    private String role;
     private List<TransactionTO> transactionTO;
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
 
     public long getId() {
         return id;
@@ -34,7 +53,7 @@ public class AccountTO {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = passwordEncoder().encode(password);
     }
 
     public String getEmail() {
@@ -72,7 +91,7 @@ public class AccountTO {
     public AccountTO() {
     }
 
-    public AccountTO(long id, String username, String password, String email, String accountCreateDate, double balance, List<TransactionTO> transactionTO) {
+    public AccountTO(long id, String username, String password, String email, String accountCreateDate, double balance, List<TransactionTO> transactionTO,String role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -80,5 +99,6 @@ public class AccountTO {
         this.accountCreateDate = accountCreateDate;
         this.balance = balance;
         this.transactionTO = transactionTO;
+        this.role = role;
     }
 }
