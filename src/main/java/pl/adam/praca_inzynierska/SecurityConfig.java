@@ -96,5 +96,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void get() {
         Account account = new Account("Dziala", passwordEncoder().encode("123123"), "12312312@gmail.com", "2020/04/10 22:29:50", 12, "USER", null);
         accountRepository.save(account);
+        Account account2 = new Account("Dziala2", passwordEncoder().encode("123123"), "123123122@gmail.com", "2020/04/10 22:29:50", 0, "USER", null);
+        accountRepository.save(account2);
+        Account account3 = new Account("Dziala3", passwordEncoder().encode("123123"), "123123123@gmail.com", "2020/04/10 22:29:50", 123123, "USER", null);
+        accountRepository.save(account3);
+        Account account4 = new Account("Dziala4", passwordEncoder().encode("123123"), "123123124@gmail.com", "2020/04/10 22:29:50", 4, "USER", null);
+        accountRepository.save(account4);
     }
 }

@@ -7,10 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +40,46 @@ public class AccountService {
         return accountMapper.accountTOMapper(account.get());
     }
 
+
+//     public List<Account> accountRates = new ArrayList<>();
+//        try {
+//        accountRates = findAccountByUsername(userNamesSortedByRank(findAllAccount()))
+//    } catch (Exception ignored) {
+//    }
+
+
+    public AccountTO findAccountByUsername(String username){
+        Optional<Account> account = Optional.ofNullable(accountRepository.findAccountByUsername(username));
+        if (!account.isPresent()) {
+            throw new IllegalArgumentException();
+        }
+
+        return accountMapper.accountTOMapper(account.get());
+    }
+
+
+    private List<String> userNamesSortedByRank(List<AccountTO> allAccount) {
+        Map<String, Double> result = new HashMap<>();
+        allAccount.forEach(n -> result.put(n.getUsername(), n.getBalance()));
+        return  result.entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .map(n -> n.getKey())
+                .collect(Collectors.toList());
+    }
+
+    public List<AccountTO> getRanks () {
+        List<AccountTO> allRanksList = new ArrayList<>();
+        List<String> userNameList = userNamesSortedByRank(findAllAccount());
+        for (String userName : userNameList) {
+            allRanksList.add(findAccountByUsername(userName));
+        }
+
+        return allRanksList;
+    }
+
+
+
+
     @Transactional
     public AccountTO saveAccount(AccountTO accountTO){
         this.date = Calendar.getInstance().getTime();
@@ -58,5 +95,9 @@ public class AccountService {
     @Transactional
     public void deleteAccount(Long id) {
         accountRepository.deleteById(id);
+    }
+
+
+    public AccountService() {
     }
 }
