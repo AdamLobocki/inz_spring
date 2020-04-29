@@ -2,6 +2,8 @@ package pl.adam.praca_inzynierska.account;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,9 @@ public class AccountService {
     private AccountMapper accountMapper;
     private Date date;
     private DateFormat dateFormat;
+
+    public AccountService() {
+    }
 
     @Autowired
     public AccountService(AccountRepository accountRepository, AccountMapper accountMapper) {
@@ -77,9 +82,6 @@ public class AccountService {
         return allRanksList;
     }
 
-
-
-
     @Transactional
     public AccountTO saveAccount(AccountTO accountTO){
         this.date = Calendar.getInstance().getTime();
@@ -98,6 +100,9 @@ public class AccountService {
     }
 
 
-    public AccountService() {
+    public String getUserName() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();   // pobieranie name zalogowanego użytkownika
     }
+
 }
