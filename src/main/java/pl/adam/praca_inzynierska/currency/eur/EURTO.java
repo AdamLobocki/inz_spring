@@ -9,7 +9,7 @@ public class EURTO {
     private long id;
     private String actualizationDate;
     private double rate;
-    private TransactionTO transactionTO;
+
 
     public long getId() {
         return id;
@@ -35,20 +35,14 @@ public class EURTO {
         this.rate = rate;
     }
 
-    public TransactionTO getTransaction() {
-        return transactionTO;
-    }
 
-    public void setTransaction(TransactionTO transactionTO) {
-        this.transactionTO = transactionTO;
-    }
 
     public EURTO() {
     }
 
-    public EURTO(String actualizationDate, double rate, TransactionTO transactionTO) {
+    public EURTO(String actualizationDate, double rate) {
         this.actualizationDate = actualizationDate;
         this.rate = rate;
-        this.transactionTO = transactionTO;
+
     }
 }

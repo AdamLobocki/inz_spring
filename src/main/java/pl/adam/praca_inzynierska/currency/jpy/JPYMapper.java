@@ -23,9 +23,6 @@ public class JPYMapper {
             jpyTO.setActualizationDate(jpy.getActualizationDate());
             jpyTO.setRate(jpy.getRate());
 
-            Transaction transaction = new Transaction();
-            jpyTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
-
             return jpyTO;
         }
 
@@ -40,8 +37,7 @@ public class JPYMapper {
             jpy.setActualizationDate(jpyTO.getActualizationDate());
             jpy.setRate(jpyTO.getRate());
 
-            Transaction transaction = new Transaction();
-            jpyTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
+
 
             return jpy;
         }

@@ -7,7 +7,7 @@ public class USDTO {
     private long id;
     private String actualizationDate;
     private double rate;
-    private TransactionTO transactionTO;
+
 
     public long getId() {
         return id;
@@ -33,20 +33,13 @@ public class USDTO {
         this.rate = rate;
     }
 
-    public TransactionTO getTransaction() {
-        return transactionTO;
-    }
-
-    public void setTransaction(TransactionTO transactionTO) {
-        this.transactionTO = transactionTO;
-    }
 
     public USDTO() {
     }
 
-    public USDTO(String actualizationDate, double rate, TransactionTO transactionTO) {
+    public USDTO(String actualizationDate, double rate) {
         this.actualizationDate = actualizationDate;
         this.rate = rate;
-        this.transactionTO = transactionTO;
+
     }
 }

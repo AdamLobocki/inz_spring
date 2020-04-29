@@ -22,9 +22,6 @@ public class USDMapper {
             usdTO.setActualizationDate(usd.getActualizationDate());
             usdTO.setRate(usd.getRate());
 
-            Transaction transaction = new Transaction();
-            usdTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
-
             return usdTO;
         }
 
@@ -39,8 +36,6 @@ public class USDMapper {
             usd.setActualizationDate(usdTO.getActualizationDate());
             usd.setRate(usdTO.getRate());
 
-            Transaction transaction = new Transaction();
-            usdTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
 
             return usd;
         }

@@ -9,12 +9,6 @@ import pl.adam.praca_inzynierska.account.TransactionMapper;
 @Component
 public class EURMapper {
 
-    private TransactionMapper transactionMapper;
-
-    @Autowired
-    public EURMapper(TransactionMapper transactionMapper) {
-        this.transactionMapper = transactionMapper;
-    }
     public EURTO eurTOMapper(EUR eur) {
 
         if (eur != null) {
@@ -22,8 +16,6 @@ public class EURMapper {
             eurTO.setActualizationDate(eur.getActualizationDate());
             eurTO.setRate(eur.getRate());
 
-            Transaction transaction = new Transaction();
-            eurTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
 
             return eurTO;
         }
@@ -39,8 +31,6 @@ public class EURMapper {
             eur.setActualizationDate(eurTO.getActualizationDate());
             eur.setRate(eurTO.getRate());
 
-            Transaction transaction = new Transaction();
-            eurTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
 
             return eur;
         }

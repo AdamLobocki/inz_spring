@@ -10,12 +10,6 @@ import pl.adam.praca_inzynierska.account.TransactionMapper;
 @Component
 public class CHFMapper {
 
-    private TransactionMapper transactionMapper;
-
-    @Autowired
-    public CHFMapper(TransactionMapper transactionMapper) {
-        this.transactionMapper = transactionMapper;
-    }
 
 
     public CHFTO chfTOMapper(CHF chf) {
@@ -24,9 +18,6 @@ public class CHFMapper {
             CHFTO chfTO = new CHFTO();
             chfTO.setActualizationDate(chf.getActualizationDate());
             chfTO.setRate(chf.getRate());
-
-            Transaction transaction = new Transaction();
-            chfTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
 
 
             return chfTO;
@@ -42,9 +33,6 @@ public class CHFMapper {
 
             chf.setActualizationDate(chfTO.getActualizationDate());
             chf.setRate(chfTO.getRate());
-
-            Transaction transaction = new Transaction();
-            chfTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
 
 
             return chf;

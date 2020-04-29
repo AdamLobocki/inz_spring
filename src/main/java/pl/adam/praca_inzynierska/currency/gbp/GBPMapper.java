@@ -10,12 +10,6 @@ import pl.adam.praca_inzynierska.account.TransactionMapper;
 @Component
 public class GBPMapper {
 
-    private TransactionMapper transactionMapper;
-
-    @Autowired
-    public GBPMapper(TransactionMapper transactionMapper) {
-        this.transactionMapper = transactionMapper;
-    }
 
 
     public GBPTO gbpTOMapper(GBP gbp) {
@@ -24,8 +18,6 @@ public class GBPMapper {
         gbpTO.setActualizationDate(gbp.getActualizationDate());
         gbpTO.setRate(gbp.getRate());
 
-           Transaction transaction = new Transaction();
-           gbpTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
 
         return gbpTO;
     }
@@ -41,8 +33,6 @@ public class GBPMapper {
             gbp.setActualizationDate(gbpTO.getActualizationDate());
             gbp.setRate(gbpTO.getRate());
 
-            Transaction transaction = new Transaction();
-            gbpTO.setTransaction(transactionMapper.transactionTOMapper(transaction));
 
             return gbp;
         }

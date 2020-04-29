@@ -11,9 +11,7 @@ public class CHF {
     private long id;
     private String actualizationDate;
     private double rate;
-    @OneToOne
-    @JoinColumn(name = "transaction_id", referencedColumnName = "id")
-    private Transaction transaction;
+
 
     public long getId() {
         return id;
@@ -39,20 +37,14 @@ public class CHF {
         this.rate = rate;
     }
 
-    public Transaction getTransaction() {
-        return transaction;
-    }
 
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
-    }
 
     public CHF() {
     }
 
-    public CHF(String actualizationDate, double rate, Transaction transaction) {
+    public CHF(String actualizationDate, double rate) {
         this.actualizationDate = actualizationDate;
         this.rate = rate;
-        this.transaction = transaction;
+
     }
 }
