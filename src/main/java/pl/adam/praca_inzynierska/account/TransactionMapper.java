@@ -22,7 +22,7 @@ public class TransactionMapper {
             transactionTO.setBuyRate(transaction.getBuyRate());
             transactionTO.setAmountBought(transaction.getAmountBought());
 
-            Account account = new Account();
+            Account account = transaction.getAccount();
             transactionTO.setAccount(accountMapper.accountTOMapper(account));
 
             return transactionTO;
@@ -41,7 +41,7 @@ public class TransactionMapper {
             transaction.setBuyRate(transactionTO.getBuyRate());
             transaction.setAmountBought(transactionTO.getAmountBought());
 
-            AccountTO account = new AccountTO();
+            AccountTO account = transactionTO.getAccount();
             transaction.setAccount(accountMapper.accountMapper(account));
 
             return transaction;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,11 +16,15 @@ public class TransactionService {
 
     private TransactionRepository transactionRepository;
     private TransactionMapper transactionMapper;
+    private AccountService accountService;
+    private AccountMapper accountMapper;
 
     @Autowired
-    public TransactionService(TransactionRepository transactionRepository, TransactionMapper transactionMapper) {
+    public TransactionService(TransactionRepository transactionRepository, TransactionMapper transactionMapper, AccountService accountService, AccountMapper accountMapper) {
         this.transactionRepository = transactionRepository;
         this.transactionMapper = transactionMapper;
+        this.accountService = accountService;
+        this.accountMapper = accountMapper;
     }
 
     public List<TransactionTO> findAllTransaction() {
@@ -38,9 +43,10 @@ public class TransactionService {
     }
 
     @Transactional
-    public TransactionTO saveTransaction(TransactionTO transactionTO){
+    public TransactionTO saveTransaction(TransactionTO transactionTO) {
         Transaction entity = transactionMapper.transactionMapper(transactionTO);
         entity = transactionRepository.save(entity);
+
         return transactionMapper.transactionTOMapper(entity);
     }
 
@@ -48,4 +54,17 @@ public class TransactionService {
     public void deleteTransaction(Long id) {
         transactionRepository.deleteById(id);
     }
+
+    public List<TransactionTO> getAllIdTransactions() {
+        List<TransactionTO> allTransactions = findAllTransaction();
+        List<TransactionTO> transactionsById = new ArrayList<>();
+        for (TransactionTO transaction : allTransactions) {
+            if (transaction.getId() == accountService.getCurrentId()) {
+                transactionsById.add(transaction);
+            }
+        }
+
+        return transactionsById;
+    }
+
 }

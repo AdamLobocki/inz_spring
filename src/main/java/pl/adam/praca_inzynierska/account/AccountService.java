@@ -100,9 +100,13 @@ public class AccountService {
     }
 
 
-    public String getUserName() {
+    private String getUserName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth.getName();   // pobieranie name zalogowanego użytkownika
+    }
+
+    public Long getCurrentId(){
+        return findAccountByUsername(getUserName()).getId();
     }
 
 }
