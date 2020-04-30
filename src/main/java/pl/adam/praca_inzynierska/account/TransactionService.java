@@ -55,16 +55,22 @@ public class TransactionService {
         transactionRepository.deleteById(id);
     }
 
+
+
     public List<TransactionTO> getAllIdTransactions() {
         List<TransactionTO> allTransactions = findAllTransaction();
         List<TransactionTO> transactionsById = new ArrayList<>();
         for (TransactionTO transaction : allTransactions) {
-            if (transaction.getId() == accountService.getCurrentId()) {
+            if (transaction.getAccount().getId() == accountService.getCurrentId()) {
                 transactionsById.add(transaction);
             }
         }
 
         return transactionsById;
     }
+
+//    public double getTransactionProfit(){
+//        return
+//    }
 
 }

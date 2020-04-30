@@ -23,6 +23,22 @@
 <form action="#" th:action="@{/logout}">
     <input type="submit" value="Wyloguj"/>
 </form>
+
+
+<ul>
+    <li th:each="transaction: ${allTransaction}">
+        <a th:text="|${transaction.getBuyDate()} - ${transaction.getCurrencyName()} - ${transaction.getBuyRate()} - ${transaction.getSellRate()} - ${transaction.getAmountBought()}  |"></a>
+    </li>
+</ul>
+
+
+
+
+
+
+<!--
+
+
 <table class="table table-striped table-dark">
     <thead>
     <tr>
@@ -104,3 +120,4 @@
 </table>
 </body>
 </html>
+-->
