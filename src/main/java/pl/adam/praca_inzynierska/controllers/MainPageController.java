@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.adam.praca_inzynierska.currency.AllCurrenciesServices;
+import pl.adam.praca_inzynierska.currency.CurrencyFilters;
+import pl.adam.praca_inzynierska.currency.CurrencyNames;
 import pl.adam.praca_inzynierska.currency.chf.CHFService;
 import pl.adam.praca_inzynierska.currency.chf.CHFTO;
 import pl.adam.praca_inzynierska.currency.eur.EURService;
@@ -43,15 +47,21 @@ public class MainPageController {
     }
 
     @GetMapping("/mainPage")
-    public String starting(Model model) {
+    public String starting(Model model, @RequestParam(required = false) CurrencyNames currencyNames) {
         List<Double> allRates = new ArrayList<>();
         try {
             allRates = currenciesServices.getAllRates();
         } catch (Exception ignored) {
         }
 
+        CurrencyFilters currencyFilters = new CurrencyFilters();
+        currencyFilters.setCurrencyNames(currencyNames);
+        Integer integer = null;
+
         model.addAttribute("flag", flag);
         model.addAttribute("rates", allRates);
+        model.addAttribute("filters", currencyFilters);
+        model.addAttribute("ilsoc", integer);
 
         return "mainPage";
     }
@@ -69,6 +79,20 @@ public class MainPageController {
 
         return "redirect:/mainPage";
     }
+
+    @PostMapping("/mainPage")
+    public String currencyBuying(Model model) {
+
+        CurrencyFilters currencyFilters = new CurrencyFilters();
+//        currencyFilters.setCurrencyNames(currencyNames);
+        Integer integer = null;
+
+        model.addAttribute("filters", currencyFilters);
+        model.addAttribute("ilsoc", integer);
+
+        return "redirect:/mainPage";
+    }
+
 
 
 
