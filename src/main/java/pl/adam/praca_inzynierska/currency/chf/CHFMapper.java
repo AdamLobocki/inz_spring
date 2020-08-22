@@ -18,6 +18,7 @@ public class CHFMapper {
             CHFTO chfTO = new CHFTO();
             chfTO.setActualizationDate(chf.getActualizationDate());
             chfTO.setRate(chf.getRate());
+            chfTO.setName(chf.getName());
 
 
             return chfTO;

@@ -61,4 +61,15 @@ public class AllCurrenciesServices {
 
         return allRatesList;
     }
+
+    public List<String> currencyNames() {
+        List<String> names = new ArrayList<>();
+        names.add("EUR");
+        names.add("USD");
+        names.add("CHF");
+        names.add("GBP");
+        names.add("JPY");
+
+        return names;
+    }
 }

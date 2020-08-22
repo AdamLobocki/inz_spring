@@ -11,6 +11,7 @@ public class GBP {
     private long id;
     private String actualizationDate;
     private double rate;
+    private final String name = "GBP";
 
 
     public long getId() {

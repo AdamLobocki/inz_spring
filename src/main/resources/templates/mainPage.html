@@ -32,8 +32,6 @@ Ilość Kasy <br>
 <form action="#" th:action="@{/historyPage}">
     <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Historia"/>
 </form>
-
-
 <br>
 
 <form action="#" th:action="@{/rankPage}">
@@ -45,74 +43,50 @@ Ilość Kasy <br>
     <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="pobierz kursy"/>
 </form><br/>
 <div align="center">
-    Lista walut i ceny
-
 
 
     <div th:if="${flag} == true">
+        Lista walut i ceny
         <ul class="list-group list-group-flush">
+
             <li class="list-group-item" th:text="|1 EUR: ${rates.get(0)}|"> </li>
+            <li>
+                <a th:dDouble="${currency}" th:href="'/shoppingCart/0'"> Wybierz </a>
+            </li>
             <li class="list-group-item" th:text="|1 USD: ${rates.get(1)}|"> </li>
+            <li>
+                <a th:dDouble="${currency}" th:href="'/shoppingCart/1'"> Wybierz </a>
+            </li>
             <li class="list-group-item" th:text="|1 CHF: ${rates.get(2)}|"> </li>
+            <li>
+                <a th:dDouble="${currency}" th:href="'/shoppingCart/2'"> Wybierz </a>
+            </li>
             <li class="list-group-item" th:text="|1 GBP: ${rates.get(3)}|"> </li>
+            <li>
+                <a th:dDouble="${currency}" th:href="'/shoppingCart/3'"> Wybierz </a>
+            </li>
             <li class="list-group-item" th:text="|100 JPY: ${rates.get(4)}|"> </li>
+            <li>
+                <a th:dDouble="${currency}" th:href="'/shoppingCart/4'"> Wybierz </a>
+            </li>
         </ul>
     </div>
 
+    <br/><br/><br/>
 
-    <form class="btn btn-secondary" method="post" action="/mainPage" th:object="${filters}">
-        <select name="currencyNames" th:field="*{currencyNames}">
-            <option value="">Wybierz</option>
-            <option th:each="o: ${T(pl.adam.praca_inzynierska.currency.CurrencyNames).values()}"
-                    th:value="${o.name()}"
-                    th:text="${o.name()}"></option>
-        </select>
-        <input type="submit" value="Filtruj" />
-    </form>
+    <ul>
+        <li th:each="cart: ${shoppingCarts}">
+            <a th:text="*{cart.name}"></a>
+            <a th:text="*{cart.transactionValue}"></a>
+        </li>
+    </ul>
 
-
-    <div class="dropdownRel">
-        <form>
-            <div class="form-group">
-                <form method="post" th:object="${ilsoc}">
-                    <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Podaj ilość">
-                </form>
-            </div>
+    <div th:if="${emptyCart} == true">
+        <form action="#" th:action="@{/createTransactions}">
+            <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Kup"/>
         </form>
+        <br>
     </div>
-    <div>
-        <button type="button" class="btn btn-secondary">Kup</button>
-    </div>
-    <!--
-  <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Dolar
-            <span class="badge badge-primary badge-pill">14zł</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            EUR
-            <span class="badge badge-primary badge-pill">2zł</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Jen
-            <span class="badge badge-primary badge-pill">1zł</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Szekiel
-            <span class="badge badge-primary badge-pill">2zł</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Korona
-            <span class="badge badge-primary badge-pill">8zł</span>
-        </li>
-        </ul>
-
-
-    <li th:each="currency: ${currency}">
-        <h3 th:text="${currency.name}"></h3></br>
-        <h5>Składniki: </h5></br></br>
-        <span th:text=" ${currency.recentRate}"></span></br></br>
-        -->
 
 </div>
 </body>

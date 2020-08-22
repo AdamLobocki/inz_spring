@@ -1,19 +1,34 @@
 package pl.adam.praca_inzynierska;
 
-import pl.adam.praca_inzynierska.currency.Currency;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-// @Entity
+
+@Entity
 public class ShoppingCart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
-    private Currency currencyName;
-    private String boughtDate;
-    private int rate;
-    private int amount;
+    private double transactionValue;
+    private double amountBought;
+    private double currencyRate;
+    private String name;
+    private String currencyDate;
+
+    public ShoppingCart(double transactionValue, double currencyRate, String name, String currencyDate, double amountBought) {
+        this.currencyRate = currencyRate;
+        this.transactionValue = transactionValue;
+        this.name = name;
+        this.currencyDate = currencyDate;
+        this.amountBought = amountBought;
+    }
+
+    public ShoppingCart() {
+    }
 
     public long getId() {
         return id;
@@ -23,42 +38,43 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    public Currency getCurrencyName() {
-        return currencyName;
+    public double getTransactionValue() {
+        return transactionValue;
     }
 
-    public void setCurrencyName(Currency currencyName) {
-        this.currencyName = currencyName;
+    public void setTransactionValue(double amount) {
+        this.transactionValue = amount;
     }
 
-    public String getBoughtDate() {
-        return boughtDate;
+    public double getCurrencyRate() {
+        return currencyRate;
     }
 
-    public void setBoughtDate(String boughtDate) {
-        this.boughtDate = boughtDate;
+    public void setCurrencyRate(double currencyRate) {
+        this.currencyRate = currencyRate;
     }
 
-    public int getRate() {
-        return rate;
+    public String getName() {
+        return name;
     }
 
-    public void setRate(int rate) {
-        this.rate = rate;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getAmount() {
-        return amount;
+    public String getCurrencyDate() {
+        return currencyDate;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setCurrencyDate(String currencyDate) {
+        this.currencyDate = currencyDate;
     }
 
-    public ShoppingCart(Currency currencyName, String boughtDate, int rate, int amount) {
-        this.currencyName = currencyName;
-        this.boughtDate = boughtDate;
-        this.rate = rate;
-        this.amount = amount;
+    public double getAmountBought() {
+        return amountBought;
+    }
+
+    public void setAmountBought(double amountBought) {
+        this.amountBought = amountBought;
     }
 }

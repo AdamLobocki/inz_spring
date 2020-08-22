@@ -11,6 +11,7 @@ public class USD {
     private long id;
     private String actualizationDate;
     private double rate;
+    private final String name = "USD";
 
 
     public long getId() {

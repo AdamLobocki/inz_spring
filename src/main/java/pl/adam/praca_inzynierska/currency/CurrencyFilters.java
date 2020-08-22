@@ -1,6 +1,7 @@
 package pl.adam.praca_inzynierska.currency;
 
 public class CurrencyFilters {
+
     private CurrencyNames currencyNames;
 
     public CurrencyNames getCurrencyNames() {
@@ -10,5 +11,4 @@ public class CurrencyFilters {
     public void setCurrencyNames(CurrencyNames currencyNames) {
         this.currencyNames = currencyNames;
     }
-
 }

@@ -9,6 +9,7 @@ public class AccountMapper {
 
         if (account != null) {
             AccountTO accountTO = new AccountTO();
+            accountTO.setId(account.getId());
             accountTO.setUsername(account.getUsername());
             accountTO.setPassword(account.getPassword());
             accountTO.setEmail(account.getEmail());
@@ -26,6 +27,7 @@ public class AccountMapper {
         if (accountTO != null) {
             Account account = new Account();
 
+            account.setId(accountTO.getId());
             account.setUsername(accountTO.getUsername());
             account.setPassword(accountTO.getPassword());
             account.setRole(accountTO.getRole());

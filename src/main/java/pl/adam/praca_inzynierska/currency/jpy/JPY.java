@@ -11,6 +11,7 @@ public class JPY {
     private long id;
     private String actualizationDate;
     private double rate;
+    private final String name = "JPY";
 
 
     public long getId() {

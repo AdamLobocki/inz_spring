@@ -1,11 +1,15 @@
 package pl.adam.praca_inzynierska.controllers;
 
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.adam.praca_inzynierska.ShoppingCart;
+import pl.adam.praca_inzynierska.ShoppingCartRepository;
+import pl.adam.praca_inzynierska.account.*;
 import pl.adam.praca_inzynierska.currency.AllCurrenciesServices;
 import pl.adam.praca_inzynierska.currency.CurrencyFilters;
 import pl.adam.praca_inzynierska.currency.CurrencyNames;
@@ -23,6 +27,7 @@ import pl.adam.praca_inzynierska.currency.usd.USDTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class MainPageController {
@@ -33,35 +38,49 @@ public class MainPageController {
     private GBPService gbpService;
     private USDService usdService;
     private JPYService jpyService;
+    private ShoppingCartRepository shoppingCartRepository;
+    private TransactionService transactionService;
+    private AccountService accountService;
     private boolean flag;
 
     @Autowired
-    public MainPageController(AllCurrenciesServices currenciesServices, CHFService chfService, EURService eurService, GBPService gbpService, USDService usdService, JPYService jpyService) {
+    public MainPageController(AllCurrenciesServices currenciesServices, CHFService chfService, EURService eurService,
+                              GBPService gbpService, USDService usdService, JPYService jpyService, ShoppingCartRepository shoppingCartRepository,
+                              TransactionService transactionService, AccountService accountService) {
         this.currenciesServices = currenciesServices;
         this.chfService = chfService;
         this.eurService = eurService;
         this.gbpService = gbpService;
         this.usdService = usdService;
         this.jpyService = jpyService;
+        this.shoppingCartRepository = shoppingCartRepository;
+        this.transactionService = transactionService;
+        this.accountService = accountService;
         this.flag = false;
     }
 
     @GetMapping("/mainPage")
-    public String starting(Model model, @RequestParam(required = false) CurrencyNames currencyNames) {
+    public String starting(Model model) {
         List<Double> allRates = new ArrayList<>();
+        List<ShoppingCart> shoppingCarts = shoppingCartRepository.findAll();
         try {
             allRates = currenciesServices.getAllRates();
         } catch (Exception ignored) {
         }
 
-        CurrencyFilters currencyFilters = new CurrencyFilters();
-        currencyFilters.setCurrencyNames(currencyNames);
-        Integer integer = null;
-
         model.addAttribute("flag", flag);
         model.addAttribute("rates", allRates);
-        model.addAttribute("filters", currencyFilters);
-        model.addAttribute("ilsoc", integer);
+        try {
+            for (Double allRate : allRates) {
+                model.addAttribute("currency", allRate);
+            }
+        } catch(Exception ignored) {
+        }
+        if (!shoppingCarts.isEmpty()) {
+            model.addAttribute("emptyCart", true);
+        }
+
+        model.addAttribute("shoppingCarts", shoppingCarts);
 
         return "mainPage";
     }
@@ -80,19 +99,33 @@ public class MainPageController {
         return "redirect:/mainPage";
     }
 
-    @PostMapping("/mainPage")
-    public String currencyBuying(Model model) {
+    @GetMapping("/createTransactions")
+    public String createTransactions() {
+        List<ShoppingCart> shoppingCarts = shoppingCartRepository.findAll();
+        for (ShoppingCart cart : shoppingCarts) {
+            transactionCreation(cart);
+        }
 
-        CurrencyFilters currencyFilters = new CurrencyFilters();
-//        currencyFilters.setCurrencyNames(currencyNames);
-        Integer integer = null;
-
-        model.addAttribute("filters", currencyFilters);
-        model.addAttribute("ilsoc", integer);
+        // TODO walidacja zeby nie kupic za wincej hajsu niz jest
+        // TODO dodanie daty
+        shoppingCartRepository.deleteAll();
 
         return "redirect:/mainPage";
     }
 
+    private TransactionTO transactionCreation (ShoppingCart shoppingCart) {
+        TransactionTO transaction = new TransactionTO();
+        transaction.setAmountBought(shoppingCart.getAmountBought());
+        transaction.setCurrencyName(shoppingCart.getName());
+        transaction.setBuyRate(shoppingCart.getCurrencyRate());
+
+        AccountTO account = accountService.findAccountById(accountService.getCurrentId());
+        transaction.setAccount(account);
+        transactionService.saveTransaction(transaction);
+        String name = transaction.getCurrencyName();
+
+        return transaction;
+    }
 
 
 

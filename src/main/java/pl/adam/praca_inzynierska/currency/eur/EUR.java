@@ -11,6 +11,7 @@ public class EUR {
     private long id;
     private String actualizationDate;
     private double rate;
+    private final String name = "EUR";
 
 
     public long getId() {
@@ -37,7 +38,9 @@ public class EUR {
         this.rate = rate;
     }
 
-
+    public String getName() {
+        return name;
+    }
 
     public EUR() {
     }

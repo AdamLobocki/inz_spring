@@ -11,6 +11,7 @@ public class CHF {
     private long id;
     private String actualizationDate;
     private double rate;
+    private final String name = "CHF";
 
 
     public long getId() {
@@ -37,7 +38,9 @@ public class CHF {
         this.rate = rate;
     }
 
-
+    public String getName() {
+        return name;
+    }
 
     public CHF() {
     }
@@ -45,6 +48,9 @@ public class CHF {
     public CHF(String actualizationDate, double rate) {
         this.actualizationDate = actualizationDate;
         this.rate = rate;
-
     }
+
+    // 1. dodać pole final String name w encji
+    // 2. dodac pole String name w TO(nie final)
+    // 3. dodać w maperze - tylko tym TOmapper - mapowanie name z CHF na CHFTO
 }

@@ -9,6 +9,16 @@ public class CHFTO {
     private long id;
     private String actualizationDate;
     private double rate;
+    private String name;
+
+    public CHFTO() {
+    }
+
+    public CHFTO(String actualizationDate, double rate, String name) {
+        this.actualizationDate = actualizationDate;
+        this.rate = rate;
+        this.name = name;
+    }
 
 
     public long getId() {
@@ -35,14 +45,11 @@ public class CHFTO {
         this.rate = rate;
     }
 
-
-
-    public CHFTO() {
+    public String getName() {
+        return name;
     }
 
-    public CHFTO(String actualizationDate, double rate) {
-        this.actualizationDate = actualizationDate;
-        this.rate = rate;
-
+    public void setName(String name) {
+        this.name = name;
     }
 }

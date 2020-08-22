@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formularz</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+</head>
+<body>
+<form action="#" th:action="@{/historyPage}">
+    <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Historia"/>
+</form>
+<br>
+
+<form action="#" th:action="@{/rankPage}">
+    <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Ranking"/>
+</form>
+<br/>
+
+<form action="#" th:action="@{/getCurrencies}">
+    <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="pobierz kursy"/>
+</form><br/>
+<div align="center">
+    <form method="post" th:action="@{/shoppingCart}" th:object="${shoppingCart}">
+
+        <input type="hidden" th:value="${value}">
+        <a th:text="${name}"></a>
+        <a th:text="${value}"></a>
+        <input type="number" th:field="*{transactionValue}" >
+        <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Przelicz"/>
+    </form>
+</div>
+
+</body>
+</html>
