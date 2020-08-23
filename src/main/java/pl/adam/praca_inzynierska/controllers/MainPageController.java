@@ -41,6 +41,7 @@ public class MainPageController {
     private ShoppingCartRepository shoppingCartRepository;
     private TransactionService transactionService;
     private AccountService accountService;
+    private Account account;
     private boolean flag;
 
     @Autowired
@@ -61,6 +62,10 @@ public class MainPageController {
 
     @GetMapping("/mainPage")
     public String starting(Model model) {
+
+        double accountBalance = accountService.findAccountById(accountService.getCurrentId()).getBalance();
+        model.addAttribute("accountBalance", accountBalance);
+
         List<Double> allRates = new ArrayList<>();
         List<ShoppingCart> shoppingCarts = shoppingCartRepository.findAll();
         try {
@@ -83,7 +88,11 @@ public class MainPageController {
         model.addAttribute("shoppingCarts", shoppingCarts);
 
         return "mainPage";
+
+
+
     }
+
 
     @GetMapping("/getCurrencies")
     private String getCurrencies() {
