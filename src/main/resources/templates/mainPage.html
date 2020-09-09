@@ -45,7 +45,9 @@
 <div align="center">
 
 
-    <div th:if="${flag} == true">
+    <div th:if="${currenciesInDataBase} == true">
+
+
         Lista walut i ceny
         <ul class="list-group list-group-flush">
 
@@ -78,6 +80,7 @@
         <li th:each="cart: ${shoppingCarts}">
             <a th:text="*{cart.name}"></a>
             <a th:text="*{cart.transactionValue}"></a>
+            <a th:text="*{cart.getCurrencyDate()}"></a>
         </li>
     </ul>
 

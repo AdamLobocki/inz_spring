@@ -19,6 +19,14 @@ public class Transaction {
     @ManyToOne
     private Account account;
 
+    public Transaction(String currencyName, String buyDate, double buyRate, double amountBought, Account account) {
+        this.currencyName = currencyName;
+        this.buyDate = buyDate;
+        this.buyRate = buyRate;
+        this.amountBought = amountBought;
+        this.account = account;
+    }
+
 
     public long getId() {
         return id;

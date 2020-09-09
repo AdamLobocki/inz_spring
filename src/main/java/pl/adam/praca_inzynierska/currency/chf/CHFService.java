@@ -41,7 +41,7 @@ public class CHFService extends abstractService {
         return chfMapper.chfTOMapper(chf.get());
     }
 
-    public CHFTO findLastCHFRecord() {
+    public CHFTO findLastRecord() {
         Long id = Long.valueOf(String.valueOf(findAllCHF().size()));
 
         return findCHFById(id);

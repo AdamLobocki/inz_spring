@@ -41,7 +41,7 @@ public class AccountController {
             model.addAttribute("errorMessage", NO_PASSWORD);
             return "createAccountPage";
         }
-        accountService.saveAccount(accountTO);
+        accountService.setAccountDetails(accountTO);
         model.addAttribute("errorMessage", ACCOUNT_HAS_BEEN_ADDED);
         return "startingPage";
     }

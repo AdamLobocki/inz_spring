@@ -55,7 +55,7 @@ public class AllCurrenciesServices {
         List<Double> allRatesList = new ArrayList<>();
         allRatesList.add(round(eurService.findLastRecord().getRate(), 4));
         allRatesList.add(round(usdService.findLastRecord().getRate(), 4));
-        allRatesList.add(round(chfService.findLastCHFRecord().getRate(), 4));
+        allRatesList.add(round(chfService.findLastRecord().getRate(), 4));
         allRatesList.add(round(gbpService.findLastRecord().getRate(), 4));
         allRatesList.add(round(jpyService.findLastRecord().getRate() * 100, 5));
 
@@ -71,5 +71,16 @@ public class AllCurrenciesServices {
         names.add("JPY");
 
         return names;
+    }
+
+    public List<String> currencyDates() {
+        List<String> dates = new ArrayList<>();
+        dates.add(eurService.findLastRecord().getActualizationDate());
+        dates.add(usdService.findLastRecord().getActualizationDate());
+        dates.add(chfService.findLastRecord().getActualizationDate());
+        dates.add(gbpService.findLastRecord().getActualizationDate());
+        dates.add(jpyService.findLastRecord().getActualizationDate());
+
+        return dates;
     }
 }

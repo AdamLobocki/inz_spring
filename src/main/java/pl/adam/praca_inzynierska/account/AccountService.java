@@ -2,6 +2,7 @@ package pl.adam.praca_inzynierska.account;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class AccountService {
     public AccountTO findAccountById(Long id) {
         Optional<Account> account = accountRepository.findById(id);
         if (!account.isPresent()) {
-            throw new IllegalArgumentException(); // TODO accountDoesNotExistException
+            throw new IllegalArgumentException();
         }
 
         return accountMapper.accountTOMapper(account.get());
@@ -82,16 +83,36 @@ public class AccountService {
         return allRanksList;
     }
 
+    public AccountTO saveAccount(AccountTO accountTO) {
+
+        Account entity = accountMapper.accountMapper(accountTO);
+        entity = accountRepository.save(entity);
+        return accountMapper.accountTOMapper(entity);
+    }
+
+
     @Transactional
-    public AccountTO saveAccount(AccountTO accountTO){
+    public AccountTO setAccountDetails(AccountTO accountTO){
         this.date = Calendar.getInstance().getTime();
 
         accountTO.setBalance(100);
         accountTO.setRole("USER");
         accountTO.setAccountCreateDate(dateFormat.format(date));
-        Account entity = accountMapper.accountMapper(accountTO);
-        entity = accountRepository.save(entity);
-        return accountMapper.accountTOMapper(entity);
+
+        return saveAccount(accountTO);
+    }
+
+    @Transactional
+    @Modifying
+    public AccountTO updateAccountBalance(TransactionTO transactionTO) {
+        double newBalance = (transactionTO.getSellRate() - transactionTO.getBuyRate()) * transactionTO.getAmountBought();
+
+        AccountTO accountById = findAccountById(transactionTO.getAccount().getId());
+        accountById.setBalance(accountById.getBalance() + newBalance);
+        Account account = accountMapper.accountMapper(accountById);
+        accountRepository.save(account);
+
+        return accountMapper.accountTOMapper(account);
     }
 
     @Transactional

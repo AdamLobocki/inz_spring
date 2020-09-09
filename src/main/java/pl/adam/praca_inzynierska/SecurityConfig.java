@@ -114,10 +114,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         Transaction transaction3 = new Transaction( "eur", "2020-01-13", "2020-01-14", 11, 99, 57, account);
         Transaction transaction4 = new Transaction( "chf", "2020-01-17", "2020-01-18", 100, 107, 99, account);
 
+        Transaction transaction5 = new Transaction("CHF", "2020-09-01", 3.73, 100, account);
+        Transaction transaction6 = new Transaction("EUR", "2020-09-01", 4.14, 100, account);
+        Transaction transaction7 = new Transaction("GBP", "2020-09-01", 4.73, 100, account);
+
         transactionRepository.save(transaction);
         transactionRepository.save(transaction2);
         transactionRepository.save(transaction3);
         transactionRepository.save(transaction4);
+        transactionRepository.save(transaction5);
+        transactionRepository.save(transaction6);
+        transactionRepository.save(transaction7);
 
         account.setTransaction(transactionList);
 

@@ -11,6 +11,7 @@ import pl.adam.praca_inzynierska.ShoppingCartRepository;
 import pl.adam.praca_inzynierska.currency.AllCurrenciesServices;
 import pl.adam.praca_inzynierska.currency.eur.EURService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,14 +36,12 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/shoppingCart/{id}")
-    public String aa(Model model, @PathVariable int id){
-        List<Double> allRates = allCurrenciesServices.getAllRates();
-        List<String> names = allCurrenciesServices.currencyNames();
-//        Map<String, Object> allCurrencies = allCurrenciesServices.allCurrencies();
-        currencyRate = allRates.get(id);
-        name = names.get(id);
-        model.addAttribute("value", allRates.get(id));
-        model.addAttribute("name", names.get(id));
+    public String shoppingCart(Model model, @PathVariable int id){
+        currencyRate = allCurrenciesServices.getAllRates().get(id);
+        name = allCurrenciesServices.currencyNames().get(id);
+        date = allCurrenciesServices.currencyDates().get(id);
+        model.addAttribute("value", currencyRate);
+        model.addAttribute("name", name);
         model.addAttribute("shoppingCart", new ShoppingCart());
 
         return "shoppingCart" ;
@@ -54,10 +53,11 @@ public class ShoppingCartController {
         shoppingCart.setCurrencyRate(currencyRate);
         shoppingCart.setTransactionValue(shoppingCart.getTransactionValue() * currencyRate);
         shoppingCart.setName(name);
+        shoppingCart.setCurrencyDate(date);
+
         shoppingCartRepository.save(shoppingCart);
 
         return "redirect:/mainPage";
     }
 
 }
-

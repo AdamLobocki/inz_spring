@@ -35,9 +35,11 @@ public class TransactionMapper {
 
         if (transactionTO != null) {
             Transaction transaction = new Transaction();
+            transaction.setId(transactionTO.getId());
             transaction.setCurrencyName(transactionTO.getCurrencyName());
             transaction.setBuyDate(transactionTO.getBuyDate());
             transaction.setSellDate(transactionTO.getSellDate());
+            transaction.setSellRate(transactionTO.getSellRate());
             transaction.setBuyRate(transactionTO.getBuyRate());
             transaction.setAmountBought(transactionTO.getAmountBought());
 
